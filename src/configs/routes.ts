@@ -1,4 +1,5 @@
 export const ROUTES = {
+  BASE: "/KOA-ADMIN",
   ROOT: "/",
   AUTHENTICATION: "/authentication",
   MANAGE_MEMBER: "/manage-member",

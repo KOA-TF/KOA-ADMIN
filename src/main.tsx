@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { App } from "./App.tsx";
 import { theme } from "./theme/index.ts";
+import { ROUTES } from "./configs/routes.ts";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
-          <BrowserRouter>
+          <BrowserRouter basename={ROUTES.BASE}>
             <App />
           </BrowserRouter>
         </ChakraProvider>

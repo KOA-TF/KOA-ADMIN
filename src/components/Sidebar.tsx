@@ -28,9 +28,10 @@ interface SidebarItemProps {
 
 const SidebarItem = ({ label, href }: SidebarItemProps) => {
   const shouldMatchForRoot = href === ROUTES.MANAGE_MEMBER;
-  const isMatch = window.location.pathname === href;
+  const isMatch = window.location.pathname.endsWith(href);
   const isActive =
-    isMatch || (shouldMatchForRoot && window.location.pathname === ROUTES.ROOT);
+    isMatch ||
+    (shouldMatchForRoot && window.location.pathname.endsWith(ROUTES.BASE));
 
   return (
     <ChakraLink

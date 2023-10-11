@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ROUTES } from "./configs/routes";
 import { AddCurriculum } from "./pages/AddCurriculum";
@@ -23,7 +23,6 @@ export const App = () => {
         />
         <Route />
       </Route>
-      <Route path="*" element={<Navigate to={ROUTES.ROOT} replace />}></Route>
     </Routes>
   );
 };
