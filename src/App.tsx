@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Navigate } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ROUTES } from "./configs/routes";
+import { AddCurriculum } from "./pages/AddCurriculum";
+import { AddMember } from "./pages/AddMember";
+import { Authentication } from "./pages/Authentication";
+import { ManageCommentPage } from "./pages/ManageCommentPage";
+import { ManageMemberPage } from "./pages/ManageMemberPage";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    <Routes>
+      <Route path={ROUTES.AUTHENTICATION} element={<Authentication />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path={ROUTES.ROOT} element={<ManageMemberPage />} />
+        <Route path={ROUTES.ADD_CURRICULUM} element={<AddCurriculum />} />
+        <Route path={ROUTES.ADD_MEMBER} element={<AddMember />} />
+        <Route path={ROUTES.MANAGE_COMMENT} element={<ManageCommentPage />} />
+        <Route
+          path={ROUTES.MANAGE_MEMBER}
+          element={<ManageMemberPage />}
+          index
+        />
+        <Route />
+      </Route>
+      <Route path="*" element={<Navigate to={ROUTES.ROOT} replace />}></Route>
+    </Routes>
+  );
+};
