@@ -2,7 +2,7 @@ import { VStack } from "@chakra-ui/react";
 import { MockTable } from "../components/MockTable";
 import { SearchInput } from "../components/SearchInput";
 
-export const ManageCommentPage = () => {
+export const ManageComment = () => {
   const handleSearchSubmit = (value: string) => {
     console.log(value);
   };
