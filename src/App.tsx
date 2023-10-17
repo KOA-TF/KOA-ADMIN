@@ -16,7 +16,7 @@ export const App = () => {
         <Route path={ROUTES.ADD_CURRICULUM} element={<AddCurriculum />} />
         <Route path={ROUTES.ADD_MEMBER} element={<AddMember />} />
         <Route path={ROUTES.MANAGE_COMMENT} element={<ManageComment />} />
-        <Route path={ROUTES.MANAGE_MEMBER} element={<ManageMember />} index />
+        <Route path={ROUTES.MANAGE_MEMBER} element={<ManageMember />} />
         <Route />
       </Route>
     </Routes>
