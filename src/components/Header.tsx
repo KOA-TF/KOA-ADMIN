@@ -27,7 +27,7 @@ export const Header = () => {
 const HomeButton = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate(ROUTES.ROOT);
   };
 
   return (
