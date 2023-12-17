@@ -7,6 +7,7 @@ import { RecoilRoot } from "recoil";
 import { App } from "./App.tsx";
 import { theme } from "./theme/index.ts";
 import { ROUTES } from "./configs/routes.ts";
+import "./index.css";
 
 const queryClient = new QueryClient();
 
