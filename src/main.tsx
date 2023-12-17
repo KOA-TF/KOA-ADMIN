@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
-import { ROUTES } from "./configs/routes.ts";
+import { ROUTES } from "./constants/routes.ts";
 import "./index.css";
 import { RecoilRoot } from "recoil";
 

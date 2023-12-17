@@ -1,12 +1,11 @@
 import { Link as ReactRouterLink } from "react-router-dom";
 import classNames from "classnames";
 
-import { ROUTES } from "../configs/routes";
+import { ROUTES } from "../constants/routes";
 
 const SIDEBAR_ITEMS: SidebarItemProps[] = [
   { label: "학회원 관리", href: ROUTES.MANAGE_MEMBER },
   { label: "학회원 추가", href: ROUTES.ADD_MEMBER },
-  { label: "커리큘럼 등록", href: ROUTES.ADD_CURRICULUM },
   { label: "댓글 신고접수", href: ROUTES.MANAGE_COMMENT },
 ];
 

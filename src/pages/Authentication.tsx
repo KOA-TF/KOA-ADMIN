@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../configs/routes";
+import { ROUTES } from "../constants/routes";
 import { Header } from "../components/Header";
 import { useSetRecoilState } from "recoil";
-import { isAuthState } from "../stores/isAuthState";
+import { isAuthState } from "../states/isAuthState";
 
 export const Authentication = () => {
   return (
