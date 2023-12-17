@@ -1,7 +1,6 @@
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Link as ChakraLink } from "@chakra-ui/react";
+import classNames from "classnames";
 
-import { Flex } from "@chakra-ui/react";
 import { ROUTES } from "../configs/routes";
 
 const SIDEBAR_ITEMS: SidebarItemProps[] = [
@@ -13,11 +12,11 @@ const SIDEBAR_ITEMS: SidebarItemProps[] = [
 
 export const Sidebar = () => {
   return (
-    <Flex flexDir={"column"} as="aside" bg={"gray.100"} w="48" pt="16">
+    <aside className="flex w-48 flex-col bg-gray-100 pt-16">
       {SIDEBAR_ITEMS.map((item) => (
         <SidebarItem key={item.href} {...item} />
       ))}
-    </Flex>
+    </aside>
   );
 };
 
@@ -37,21 +36,17 @@ const SidebarItem = ({ label, href }: SidebarItemProps) => {
       (pathname.endsWith(ROUTES.BASE) || pathname.endsWith(ROUTES.BASE + "/")));
 
   return (
-    <ChakraLink
-      as={ReactRouterLink}
+    <ReactRouterLink
+      className={classNames(
+        "flex h-16 w-full items-center justify-center text-xl font-semibold hover:no-underline",
+        {
+          "bg-blue-500 text-white": isActive,
+          "text-gray-600": !isActive,
+        },
+      )}
       to={href}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      w={"full"}
-      fontSize={"xl"}
-      fontWeight={"semibold"}
-      _hover={{ textDecoration: "none" }}
-      h={"16"}
-      bg={isActive ? "blue.500" : "transparent"}
-      color={isActive ? "white" : "black"}
     >
       {label}
-    </ChakraLink>
+    </ReactRouterLink>
   );
 };

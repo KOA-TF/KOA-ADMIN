@@ -1,18 +1,7 @@
-import { VStack } from "@chakra-ui/react";
-import { MockTable } from "../components/MockTable";
-import { SearchInput } from "../components/SearchInput";
-
 export const ManageComment = () => {
-  const handleSearchSubmit = (value: string) => {
-    console.log(value);
-  };
-
   return (
-    <VStack as={"main"} p={9} alignItems={"center"} w={"full"}>
-      <VStack gap={"10"} w={"full"} maxW={"container.xl"} alignItems={"end"}>
-        <SearchInput onSubmit={handleSearchSubmit} />
-        <MockTable />
-      </VStack>
-    </VStack>
+    <main className="flex w-full flex-col items-center p-9">
+      <div className="flex w-full max-w-screen-xl items-end gap-10"></div>
+    </main>
   );
 };

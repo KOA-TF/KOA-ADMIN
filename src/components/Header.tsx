@@ -1,26 +1,18 @@
-import { Image, Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../configs/routes";
+import { useRecoilState } from "recoil";
+import { isAuthState } from "../stores/isAuthState";
 
 export const Header = () => {
   return (
-    <Flex
-      as="header"
-      w={"full"}
-      h={"16"}
-      flexShrink={0}
-      px={"4"}
-      alignItems={"center"}
-      borderBottom={"1px"}
-      borderColor={"gray.200"}
-    >
-      <Flex gap={"5"} alignItems={"center"}>
+    <header className="flex h-16 w-full flex-shrink-0 items-center border-b border-gray-200 px-4">
+      <div className="flex items-center gap-4">
         <HomeButton />
         <AdminName />
-      </Flex>
-      <Box flex={1}></Box>
+      </div>
+      <div className="flex-1"></div>
       <LogoutButton />
-    </Flex>
+    </header>
   );
 };
 
@@ -31,30 +23,37 @@ const HomeButton = () => {
   };
 
   return (
-    <Button variant={"unstyled"} onClick={handleClick}>
-      <Image src={"logo.svg"}></Image>
-    </Button>
+    <button
+      className="rounded p-1 hover:bg-gray-100 active:bg-transparent"
+      onClick={handleClick}
+    >
+      <img src={"logo.svg"}></img>
+    </button>
   );
 };
 
 const AdminName = () => {
-  return <Text fontWeight={"bold"}>ADMIN</Text>;
+  return <span className="font-bold">ADMIN</span>;
 };
 
 const LogoutButton = () => {
-  const displayLogout = true;
-  // TODO: implement logout
+  const [isAuth, setIsAuth] = useRecoilState(isAuthState);
+
   const navigate = useNavigate();
   const handleLogout = () => {
+    setIsAuth(false);
     navigate(ROUTES.AUTHENTICATION);
   };
 
   return (
     <>
-      {displayLogout ? (
-        <Button w={"40"} variant={"ghost"} onClick={handleLogout}>
+      {isAuth ? (
+        <button
+          className="w-36 rounded-lg p-2 hover:bg-gray-100 active:bg-transparent"
+          onClick={handleLogout}
+        >
           Logout
-        </Button>
+        </button>
       ) : null}
     </>
   );

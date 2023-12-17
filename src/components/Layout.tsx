@@ -1,17 +1,14 @@
-import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Flex flexDir={"column"} h={"100vh"}>
+    <div className="flex h-screen flex-col">
       <Header />
-      <Flex flex={1}>
+      <div className="flex flex-1">
         <Sidebar />
-        <Box as="main" overflow={"scroll"}>
-          {children}
-        </Box>
-      </Flex>
-    </Flex>
+        <main className="flex-1 overflow-scroll">{children}</main>
+      </div>
+    </div>
   );
 };

@@ -1,55 +1,72 @@
-import { TableContainer, VStack } from "@chakra-ui/react";
-import { createColumnHelper } from "@tanstack/react-table";
-import { DataTable } from "../components/DataTable";
 import { SearchInput } from "../components/SearchInput";
 import * as DTO from "../models";
 
-interface Data extends DTO.Member {}
+export function ManageMember() {
+  return (
+    <div className="flex w-full flex-col items-center p-9">
+      <div className="w-full max-w-4xl items-end gap-10">
+        <SearchInput />
+        <div className="w-full">
+          <table>
+            <TableHeader />
+            <TableBody />
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-const columnHelper = createColumnHelper<Data>();
-const columns = [
-  columnHelper.accessor("id", {
-    header: "ID",
-  }),
-  columnHelper.accessor("gisu", {
-    header: "기수",
-  }),
-  columnHelper.accessor("name", {
-    header: "이름",
-  }),
-  columnHelper.accessor("phoneNumber", {
-    header: "전화번호",
-  }),
-  columnHelper.accessor("birthDate", {
-    header: "생년월일",
-  }),
-  columnHelper.accessor("email", {
-    header: "이메일",
-  }),
-  columnHelper.accessor("isAdmin", {
-    header: "운영진",
-    cell: (value) => (value ? "Y" : "N"),
-  }),
-];
+function TableHeader() {
+  return (
+    <thead className="bg-gray-100">
+      <tr>
+        {[
+          "ID",
+          "기수",
+          "이름",
+          "전화번호",
+          "생년월일",
+          "이메일",
+          "운영진",
+          "관리",
+        ].map((header) => {
+          return (
+            <th className="text-center" key={header}>
+              {header}
+            </th>
+          );
+        })}
+      </tr>
+    </thead>
+  );
+}
 
-export const ManageMember = () => {
-  const handleSearchSubmit = (value: string) => {
-    console.log(value);
-  };
+function TableBody() {
+  const members = data;
 
   return (
-    <VStack as={"main"} p={9} alignItems={"center"} w={"full"}>
-      <VStack gap={"10"} w={"full"} maxW={"container.xl"} alignItems={"end"}>
-        <SearchInput onSubmit={handleSearchSubmit} />
-        <TableContainer w={"full"}>
-          <DataTable columns={columns} data={data} />
-        </TableContainer>
-      </VStack>
-    </VStack>
+    <tbody>
+      {members.map((member) => (
+        <tr key={member.id}>
+          <td>{member.id}</td>
+          <td>{member.gisu}</td>
+          <td>{member.name}</td>
+          <td>{member.phoneNumber}</td>
+          <td>{member.birthDate}</td>
+          <td>{member.email}</td>
+          <td>{member.isAdmin ? "Y" : "N"}</td>
+          <td className="flex justify-center">
+            <button>수정</button>
+            <button>삭제</button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
   );
-};
+}
 
-const data: Data[] = [
+const data: DTO.Member[] = [
   {
     id: 1,
     gisu: 28,

@@ -1,29 +1,31 @@
-import { Box, Flex } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
+import { ROUTES } from "../configs/routes";
+import { useRecoilValue } from "recoil";
+import { isAuthState } from "../stores/isAuthState";
 
 export const ProtectedRoute = () => {
   const navigate = useNavigate();
 
-  const isAuthenticated = true;
+  const isAuth = useRecoilValue(isAuthState);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/sign-in");
+  useLayoutEffect(() => {
+    if (!isAuth) {
+      navigate(ROUTES.AUTHENTICATION);
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuth, navigate]);
 
   return (
-    <Flex flexDir={"column"} h={"100vh"}>
+    <div className="flex h-screen flex-col">
       <Header />
-      <Flex flex={1}>
+      <div className="flex flex-1">
         <Sidebar />
-        <Box as={"main"} overflow={"scroll"} flex={1}>
+        <main className="flex-1 overflow-scroll">
           <Outlet />
-        </Box>
-      </Flex>
-    </Flex>
+        </main>
+      </div>
+    </div>
   );
 };

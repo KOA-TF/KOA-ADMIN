@@ -1,65 +1,52 @@
-import { Text, Card, Flex, HStack, Input, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../configs/routes";
+import { Header } from "../components/Header";
+import { useSetRecoilState } from "recoil";
+import { isAuthState } from "../stores/isAuthState";
 
 export const Authentication = () => {
   return (
-    <Flex
-      as={"main"}
-      bg={"gray.100"}
-      h={"100vh"}
-      justify={"center"}
-      align={"center"}
-    >
-      <Card
-        shadow={"sm"}
-        h={"340"}
-        p={"12"}
-        display={"flex"}
-        flexDir={"column"}
-        align={"center"}
-        justify={"center"}
-        gap={"10"}
-      >
-        <Title />
-        <Form />
-      </Card>
-    </Flex>
+    <div className="flex h-screen flex-col bg-gray-100">
+      <Header />
+      <main className="flex flex-1 items-center justify-center ">
+        <div className="flex h-[340px] flex-col items-center justify-center gap-10 rounded-xl bg-white p-12 shadow-sm">
+          <Title />
+          <Form />
+        </div>
+      </main>
+    </div>
   );
 };
 
 const Title = () => {
   return (
-    <Text fontWeight={"bold"} fontSize={"xl"} as="h1">
-      관리자용 비밀번호를 입력해주세요
-    </Text>
+    <h1 className="text-xl font-bold">관리자용 비밀번호를 입력해주세요</h1>
   );
 };
 
 const Form = () => {
   // TODO: implement login
   const navigate = useNavigate();
+  const setIsAuth = useSetRecoilState(isAuthState);
+
   const handleSubmit = () => {
+    setIsAuth(true);
     navigate(ROUTES.ROOT);
   };
 
   return (
-    <HStack>
-      <Input
-        variant={"filled"}
-        w={"335px"}
-        size={"lg"}
+    <div className="flex gap-4">
+      <input
+        className="w-80 rounded-lg bg-gray-100 px-5 py-4 outline-blue-600"
         placeholder={"비밀번호 입력하기"}
         type={"password"}
       />
-      <Button
-        variant={"solid"}
-        colorScheme={"blue"}
-        size={"lg"}
+      <button
+        className="w-40 rounded-lg bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-600"
         onClick={handleSubmit}
       >
         로그인
-      </Button>
-    </HStack>
+      </button>
+    </div>
   );
 };
