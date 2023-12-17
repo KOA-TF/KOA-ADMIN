@@ -2,6 +2,9 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import classNames from "classnames";
 
 import { ROUTES } from "../constants/routes";
+import { useRecoilState } from "recoil";
+import { showSidebarState } from "../states/showSidebarState";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const SIDEBAR_ITEMS: SidebarItemProps[] = [
   { label: "학회원 관리", href: ROUTES.MANAGE_MEMBER },
@@ -10,11 +13,30 @@ const SIDEBAR_ITEMS: SidebarItemProps[] = [
 ];
 
 export const Sidebar = () => {
+  const [showSidebar, setShowSidebar] = useRecoilState(showSidebarState);
+
   return (
-    <aside className="flex w-48 flex-col bg-gray-100 pt-16">
-      {SIDEBAR_ITEMS.map((item) => (
-        <SidebarItem key={item.href} {...item} />
-      ))}
+    <aside
+      className={classNames("relative flex flex-col  bg-gray-100 pt-16", {
+        "w-0": !showSidebar,
+        "w-48": showSidebar,
+      })}
+    >
+      {showSidebar
+        ? SIDEBAR_ITEMS.map((item) => <SidebarItem key={item.href} {...item} />)
+        : null}
+      <button
+        className={classNames(
+          "z-10 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-100 active:bg-gray-200",
+          {
+            "absolute -right-4 top-4": showSidebar,
+            "absolute -left-4 top-4": !showSidebar,
+          },
+        )}
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        {showSidebar ? <ChevronLeft /> : <ChevronRight />}
+      </button>
     </aside>
   );
 };
